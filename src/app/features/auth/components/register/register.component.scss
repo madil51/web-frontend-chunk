@@ -1,0 +1,226 @@
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+}
+
+.auth-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: #7f8c8d;
+    font-size: 1rem;
+  }
+}
+
+.auth-form {
+  .name-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e1e8ed;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+
+      &:focus {
+        outline: none;
+        border-color: #269C94;
+        box-shadow: 0 0 0 3px rgba(38, 156, 148, 0.1);
+      }
+
+      &.error {
+        border-color: #e74c3c;
+
+        &:focus {
+          border-color: #e74c3c;
+          box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+      }
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .password-input {
+    position: relative;
+
+    .password-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      color: #7f8c8d;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #269C94;
+      }
+
+      .icon {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 0.9rem;
+      line-height: 1.4;
+
+      input[type="checkbox"] {
+        margin-right: 0.75rem;
+        margin-top: 0.25rem;
+        transform: scale(1.2);
+      }
+
+      a {
+        color: #269C94;
+        text-decoration: none;
+        font-weight: 600;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .btn {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: #269C94;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background: #1e7d76;
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  .btn-full {
+    width: 100%;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 0.5rem;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e1e8ed;
+
+  p {
+    color: #7f8c8d;
+    margin: 0;
+
+    a {
+      color: #269C94;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-card {
+    padding: 2rem;
+  }
+}

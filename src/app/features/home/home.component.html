@@ -1,0 +1,122 @@
+<nav class="bg-white shadow-md fixed w-full top-0 z-50">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-gradient">Chunk</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="text-gray-700 hover:text-teal-600 transition-colors">Home</a>
+                <a href="#features" class="text-gray-700 hover:text-teal-600 transition-colors">Features</a>
+                <a href="#how-it-works" class="text-gray-700 hover:text-teal-600 transition-colors">How It Works</a>
+                <a routerLink="/customer" class="text-gray-700 hover:text-teal-600 transition-colors">
+                    Customer
+                </a>
+                <a routerLink="/driver" href="#" onclick="showDriverDashboard()"
+                    class="text-gray-700 hover:text-teal-600 transition-colors">Driver</a>
+                <a href="#" onclick="showAdminDashboard()"
+                    class="text-gray-700 hover:text-teal-600 transition-colors">Admin</a>
+            </div>
+            <div class="flex space-x-3">
+                <button (click)="showCreateRequest()" class="btn-primary">Create Request</button>
+                <app-create-request></app-create-request>
+                <button onclick="showLogin()" class="btn-secondary">Login</button>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="home-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <img src="assets/hero-image.jpg" alt="Professional Junk Removal Service" class="hero-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container mx-auto px-4">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="text-gradient">Chunk</span>
+                        <br>Your Junk Removal Solution
+                    </h1>
+                    <p class="hero-subtitle">
+                        Connect with local haulers, get AI-powered pricing estimates,
+                        and enjoy hassle-free junk removal with real-time tracking.
+                    </p>
+                    <div class="hero-actions">
+                        <button mat-raised-button class="btn-primary-large" (click)="showCreateRequest()">
+                            Create New Request
+                        </button>
+                        <button mat-stroked-button class="btn-secondary-large" (click)="becomeDriver()">
+                            Become a Driver
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Why Choose Chunk?</h2>
+            <div class="features-grid">
+                <div class="feature-card" *ngFor="let feature of features">
+                    <div class="feature-icon">
+                        <mat-icon>{{feature.icon}}</mat-icon>
+                    </div>
+                    <h3 class="feature-title">{{feature.title}}</h3>
+                    <p class="feature-description">{{feature.description}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-container">
+                <div class="step-card" *ngFor="let step of steps; let i = index">
+                    <div class="step-number">{{i + 1}}</div>
+                    <div class="step-content">
+                        <h3 class="step-title">{{step.title}}</h3>
+                        <p class="step-description">{{step.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+                    <div class="stars">{{testimonial.stars}}</div>
+                    <p class="testimonial-text">{{testimonial.text}}</p>
+                    <p class="testimonial-author">{{testimonial.author}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container mx-auto px-4">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Get Started?</h2>
+                <p class="cta-subtitle">Join thousands of satisfied customers and drivers</p>
+                <div class="cta-actions">
+                    <button mat-raised-button class="btn-primary-large" (click)="showCreateRequest()">
+                        Create New Request
+                    </button>
+                    <button mat-stroked-button class="btn-secondary-large" (click)="joinWaitlist()">
+                        Join Waitlist
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

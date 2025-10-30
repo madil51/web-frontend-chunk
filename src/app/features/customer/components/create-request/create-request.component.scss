@@ -1,0 +1,315 @@
+root {
+    --primary-teal: #269C94;
+    --accent-green: #27AE60;
+    --bg-light: #F8F8F8;
+    --text-primary: #2C2C2C;
+    --text-secondary: #6B7280;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, rgba(38, 156, 148, 0.8) 0%, rgba(39, 174, 96, 0.6) 100%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="Arial" font-size="24" fill="%23999">Professional Junk Removal Service</text></svg>');
+    background-size: cover;
+    background-position: center;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-teal), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-primary {
+    background-color: var(--primary-teal);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #1F7A73;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--primary-teal);
+    border: 2px solid var(--primary-teal);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-teal);
+    color: white;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-teal), var(--accent-green));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin: 0 auto 1rem;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-teal);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pricing-option {
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pricing-option:hover {
+    border-color: var(--primary-teal);
+}
+
+.pricing-option.selected {
+    border-color: var(--primary-teal);
+    background: rgba(38, 156, 148, 0.05);
+}
+
+.upload-area {
+    border: 2px dashed #E5E7EB;
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--primary-teal);
+    background: rgba(38, 156, 148, 0.05);
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+}
+
+.file-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent-green);
+    transition: width 0.3s ease;
+}
+
+.chat-container {
+    height: 400px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.chat-input {
+    padding: 1rem;
+    border-top: 1px solid #E5E7EB;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+.message.own {
+    background: var(--primary-teal);
+    color: white;
+    margin-left: auto;
+}
+
+.message.other {
+    background: #F3F4F6;
+}
+
+.admin-sidebar {
+    background: #1F2937;
+    color: white;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 1rem;
+}
+
+.admin-content {
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-teal);
+}
+
+.metric-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.status-active {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.status-completed {
+    background: #DBEAFE;
+    color: #1E40AF;
+}
+
+.status-cancelled {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .features-grid,
+    .steps-container,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .admin-content {
+        margin-left: 0;
+    }
+}

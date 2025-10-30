@@ -1,0 +1,81 @@
+<div class="driver-dashboard">
+  <nav class="navbar">
+    <div class="nav-brand">
+      <h3>Chunk Driver Portal</h3>
+    </div>
+    <div class="nav-menu">
+      <a routerLink="/driver/available-jobs" routerLinkActive="active" class="nav-link">
+        Available Jobs
+      </a>
+      <a routerLink="/driver/my-jobs" routerLinkActive="active" class="nav-link">
+        My Jobs
+      </a>
+      <a routerLink="/driver/earnings" routerLinkActive="active" class="nav-link">
+        Earnings
+      </a>
+      <a routerLink="/driver/profile" routerLinkActive="active" class="nav-link">
+        Profile
+      </a>
+      
+      <div class="status-toggle">
+        <label class="status-switch">
+          <input type="checkbox" [checked]="onlineStatus" (change)="toggleOnlineStatus()">
+          <span class="slider"></span>
+        </label>
+        <span class="status-text" [class.online]="onlineStatus" [class.offline]="!onlineStatus">
+          {{onlineStatus ? 'Online' : 'Offline'}}
+        </span>
+      </div>
+
+      <div class="notification-dropdown">
+        <button class="notification-btn" (click)="toggleNotifications()">
+          <i class="icon icon-bell"></i>
+          <span class="notification-badge" *ngIf="unreadCount > 0">{{unreadCount}}</span>
+        </button>
+        <div class="notification-panel" *ngIf="showNotifications">
+          <div class="notification-header">
+            <h4>Notifications</h4>
+            <button class="clear-btn" (click)="clearAllNotifications()">Clear All</button>
+          </div>
+          <div class="notification-list">
+            <div 
+              *ngFor="let notification of notifications" 
+              class="notification-item"
+              [class.unread]="!notification.read"
+              (click)="!notification.read && markNotificationAsRead(notification.id)"
+            >
+              <div class="notification-content">
+                <p class="notification-message">{{notification.message}}</p>
+                <span class="notification-time">{{notification.createdAt | date:'short'}}</span>
+              </div>
+            </div>
+            <div *ngIf="notifications.length === 0" class="no-notifications">
+              No notifications
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-menu">
+        <button class="user-btn">
+          <span>{{user?.firstName}} {{user?.lastName}}</span>
+          <i class="icon icon-chevron-down"></i>
+        </button>
+        <div class="user-dropdown">
+          <a routerLink="/driver/profile" class="dropdown-item">
+            <i class="icon icon-user"></i>
+            Profile
+          </a>
+          <button class="dropdown-item" (click)="logout()">
+            <i class="icon icon-logout"></i>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

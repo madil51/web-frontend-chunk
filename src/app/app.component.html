@@ -1,0 +1,7 @@
+<div class="min-h-screen bg-bg-light">
+  <app-header *ngIf="showHeader"></app-header>
+  <main [class.with-header]="showHeader">
+    <router-outlet></router-outlet>
+  </main>
+  <app-footer *ngIf="showFooter"></app-footer>
+</div>

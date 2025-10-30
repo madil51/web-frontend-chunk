@@ -1,0 +1,262 @@
+.customer-dashboard {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.navbar {
+  background: white;
+  border-bottom: 1px solid #e1e8ed;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .nav-brand {
+    h3 {
+      color: #269C94;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .nav-link {
+      color: #2c3e50;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+
+      &:hover {
+        background: #f8f9fa;
+        color: #269C94;
+      }
+
+      &.active {
+        background: #269C94;
+        color: white;
+      }
+    }
+
+    .notification-dropdown {
+      position: relative;
+
+      .notification-btn {
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: #f8f9fa;
+        }
+
+        .icon {
+          font-size: 1.2rem;
+          color: #7f8c8d;
+        }
+
+        .notification-badge {
+          position: absolute;
+          top: 0;
+          right: 0;
+          background: #e74c3c;
+          color: white;
+          border-radius: 50%;
+          width: 18px;
+          height: 18px;
+          font-size: 0.7rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+        }
+      }
+
+      .notification-panel {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 1000;
+
+        .notification-header {
+          padding: 1rem;
+          border-bottom: 1px solid #e1e8ed;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          h4 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1rem;
+          }
+
+          .clear-btn {
+            background: none;
+            border: none;
+            color: #269C94;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .notification-list {
+          .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid #f8f9fa;
+            cursor: pointer;
+            transition: background 0.3s ease;
+
+            &:hover {
+              background: #f8f9fa;
+            }
+
+            &.unread {
+              background: #e8f5e8;
+              border-left: 4px solid #27AE60;
+            }
+
+            .notification-content {
+              .notification-message {
+                margin: 0 0 0.5rem 0;
+                color: #2c3e50;
+                font-size: 0.9rem;
+                line-height: 1.4;
+              }
+
+              .notification-time {
+                color: #7f8c8d;
+                font-size: 0.8rem;
+              }
+            }
+          }
+
+          .no-notifications {
+            padding: 2rem;
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    .user-menu {
+      position: relative;
+
+      .user-btn {
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: #f8f9fa;
+        }
+
+        span {
+          font-weight: 500;
+          color: #2c3e50;
+        }
+
+        .icon {
+          color: #7f8c8d;
+          font-size: 0.8rem;
+        }
+      }
+
+      .user-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        min-width: 200px;
+        z-index: 1000;
+
+        .dropdown-item {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.75rem 1rem;
+          color: #2c3e50;
+          text-decoration: none;
+          background: none;
+          border: none;
+          width: 100%;
+          cursor: pointer;
+          transition: background 0.3s ease;
+
+          &:hover {
+            background: #f8f9fa;
+          }
+
+          .icon {
+            color: #7f8c8d;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.main-content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+
+    .nav-menu {
+      .nav-link {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .notification-panel {
+        width: 300px;
+        right: -50px;
+      }
+    }
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+}

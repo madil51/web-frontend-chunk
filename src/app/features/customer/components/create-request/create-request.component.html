@@ -1,0 +1,157 @@
+<div *ngIf="showModal" id="create-request-modal"
+  class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-y-auto">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">Create Junk Removal Request</h2>
+        <button (click)="hideCreateRequest()" class="text-gray-500 hover:text-gray-700">
+          <i class="fas fa-times text-2xl">X</i>
+        </button>
+      </div>
+
+      <form #requestForm="ngForm" class="space-y-6" (ngSubmit)="submitRequest()">
+        <!-- Step 1: Location & Contact -->
+        <div class="form-section">
+          <h3 class="text-lg font-semibold mb-4">Location & Contact Information</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-2">Pickup Address *</label>
+              <input type="text" name="address" [(ngModel)]="address"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                placeholder="Enter your address" required minlength="5">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Phone Number *</label>
+              <input type="tel" name="phone" [(ngModel)]="phone"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                placeholder="(555) 123-4567" required minlength="10">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Contact Method *</label>
+              <select name="contactMethod" [(ngModel)]="contactMethod"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                required>
+                <option value="phone">Phone</option>
+                <option value="email">Email</option>
+                <option value="both">Both</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Media Upload -->
+        <div class="form-section">
+          <h3 class="text-lg font-semibold mb-4">Upload Photos & Video</h3>
+          <p class="text-gray-600 mb-4">Upload up to 3 photos and 1 video (30 seconds max)</p>
+
+          <div class="upload-area" (click)="triggerFileUpload()">
+            <i class="fas fa-cloud-upload-alt text-4xl text-teal-600 mb-4"></i>
+            <h4 class="text-lg font-semibold mb-2">Drag & Drop or Click to Upload</h4>
+            <p class="text-gray-600">Photos: JPG, PNG up to 10MB each<br>Video: MP4, MOV up to 50MB</p>
+          </div>
+          <input type="file" id="file-input" multiple accept="image/*,video/*" style="display: none;"
+            (change)="handleFileUpload($event)">
+          <div id="uploaded-files" class="space-y-3">
+            <div *ngFor="let file of mediaFiles">{{ file.name }}</div>
+          </div>
+        </div>
+
+        <!-- Step 3: Item Description -->
+        <div class="form-section">
+          <h3 class="text-lg font-semibold mb-4">Describe Your Items</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-2">Item Description *</label>
+              <textarea name="description" [(ngModel)]="description" minlength="10" required
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                rows="4" placeholder="Describe the items..." required minlength="10"></textarea>
+                <p class="text-sm text-gray-500">Please describe your items in at least 10 characters.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-2">Item Category *</label>
+                <select name="category" [(ngModel)]="category"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  required>
+                  <option value="">Select category</option>
+                  <option value="furniture">Furniture</option>
+                  <option value="appliances">Appliances</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="construction">Construction Debris</option>
+                  <option value="yard">Yard Waste</option>
+                  <option value="general">General Household</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">Estimated Volume *</label>
+                <select name="volume" [(ngModel)]="volume"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  required>
+                  <option value="small">Small (Pickup Truck)</option>
+                  <option value="medium">Medium (Cargo Van)</option>
+                  <option value="large">Large (Box Truck)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Pricing Preference -->
+        <div class="form-section">
+          <h3 class="text-lg font-semibold mb-4">Pricing Preference</h3>
+          <div class="space-y-4">
+            <div class="pricing-option" (click)="pricingPreference='ai'">
+              <div class="flex items-start gap-3">
+                <input type="radio" name="pricingPreference" [(ngModel)]="pricingPreference" value="ai" class="mt-1">
+                <div>
+                  <h4 class="font-semibold text-lg">AI Fixed Price</h4>
+                  <p class="text-gray-600 mb-2">Get instant pricing and immediate dispatch</p>
+                  <div id="ai-estimate" class="bg-green-50 p-3 rounded-lg">
+                    <div class="text-lg font-semibold text-green-700">$75 - $125</div>
+                    <div class="text-sm text-green-600">Confidence: 85%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pricing-option" (click)="pricingPreference='bidding'">
+              <div class="flex items-start gap-3">
+                <input type="radio" name="pricingPreference" [(ngModel)]="pricingPreference" value="bidding" class="mt-1">
+                <div>
+                  <h4 class="font-semibold text-lg">Driver Bidding</h4>
+                  <p class="text-gray-600">Receive multiple offers from local drivers</p>
+                  <p class="text-sm text-yellow-600 mt-1">Bids expire in 15 minutes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional: Scheduled Date & Instructions -->
+        <div class="form-section">
+          <h3 class="text-lg font-semibold mb-4">Additional Details</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-2">Scheduled Date</label>
+              <input type="date" name="scheduledDate" [(ngModel)]="scheduledDate"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Special Instructions</label>
+              <textarea name="instructions" [(ngModel)]="instructions"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                rows="2" placeholder="Any special notes..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex justify-end gap-4 pt-6 border-t">
+          <button type="button" (click)="hideCreateRequest()" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Create Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="error-message">
+  <div class="error-icon">
+    <i class="icon icon-exclamation-triangle"></i>
+  </div>
+  <div class="error-content">
+    <h4 class="error-title">Error</h4>
+    <p class="error-message-text">{{message}}</p>
+    <p class="error-details" *ngIf="details">{{details}}</p>
+    <button 
+      *ngIf="showRetry && onRetry" 
+      class="btn btn-retry"
+      (click)="onRetry()"
+    >
+      {{retryText}}
+    </button>
+  </div>
+</div>
