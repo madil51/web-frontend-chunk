@@ -21,7 +21,7 @@ export class RoleGuard implements CanActivate {
       return true;
     }
 
-    this.snackBar.open('You do not have permission to access this page', 'Close', {
+    this.snackBar.open('You do not have permission to access this page from ROLE', 'Close', {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top'
@@ -29,6 +29,7 @@ export class RoleGuard implements CanActivate {
     
     // Redirect based on user role
     const user = this.authService.getCurrentUser();
+    console.log('Current User in RoleGuard:', user);
     if (user) {
       switch (user.role) {
         case 'customer':

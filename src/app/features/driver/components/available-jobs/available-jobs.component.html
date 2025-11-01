@@ -1,0 +1,40 @@
+<div class="p-4 sm:p-6">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">📋 Available Jobs</h2>
+
+  <div *ngIf="jobs.length === 0" class="text-gray-500">No jobs available right now.</div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div *ngFor="let job of jobs" class="bg-white rounded-xl shadow-md border border-gray-200 p-4 hover:shadow-lg transition-shadow">
+      
+      <!-- Job Summary -->
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-lg font-semibold text-teal-600">{{ job.category | titlecase }}</h3>
+        <span class="text-xs text-gray-400">{{ getTimeAgo(job.created_at) }}</span>
+      </div>
+
+      <!-- Description -->
+      <p class="text-gray-700 text-sm mb-2">{{ job.description }}</p>
+
+      <!-- Quick Info -->
+      <ul class="text-sm text-gray-600 space-y-1 mb-3">
+        <li><strong>📍 Address:</strong> {{ job.address }}</li>
+        <li><strong>📞 Contact:</strong> {{ job.contact_method }} ({{ job.phone }})</li>
+        <li><strong>📦 Volume:</strong> {{ job.volume }}</li>
+        <li><strong>⚡ Service:</strong> {{ job.service_type }}</li>
+        <li><strong>💰 Pricing:</strong> {{ job.pricing_preference | titlecase }}</li>
+        <li><strong>📅 Scheduled:</strong> {{ job.scheduled_date | date:'mediumDate' }}</li>
+        <li *ngIf="job.instructions"><strong>📝 Instructions:</strong> {{ job.instructions }}</li>
+      </ul>
+
+      <!-- Media Preview -->
+      <div *ngIf="job.media_files.length > 0" class="mb-3">
+        <img [src]="'/uploads/' + job.media_files[0]" alt="Job media" class="w-full h-40 object-cover rounded-md border">
+      </div>
+
+      <!-- Action Button -->
+      <button class="w-full bg-teal-500 text-white py-2 rounded-lg font-semibold hover:bg-teal-600 transition-colors">
+        ✅ Accept Job
+      </button>
+    </div>
+  </div>
+</div>

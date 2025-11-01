@@ -86,8 +86,16 @@ export class AuthService {
       );
   }
 
-  getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
+  getCurrentUser(): any {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return { id: payload.id, role: payload.role };
+    } catch (e) {
+      return null;
+    }
   }
 
   isAuthenticated(): boolean {

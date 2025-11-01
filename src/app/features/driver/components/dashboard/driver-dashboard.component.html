@@ -16,7 +16,7 @@
       <a routerLink="/driver/profile" routerLinkActive="active" class="nav-link">
         Profile
       </a>
-      
+
       <div class="status-toggle">
         <label class="status-switch">
           <input type="checkbox" [checked]="onlineStatus" (change)="toggleOnlineStatus()">
@@ -38,12 +38,9 @@
             <button class="clear-btn" (click)="clearAllNotifications()">Clear All</button>
           </div>
           <div class="notification-list">
-            <div 
-              *ngFor="let notification of notifications" 
-              class="notification-item"
+            <div *ngFor="let notification of notifications" class="notification-item"
               [class.unread]="!notification.read"
-              (click)="!notification.read && markNotificationAsRead(notification.id)"
-            >
+              (click)="!notification.read && markNotificationAsRead(notification.id)">
               <div class="notification-content">
                 <p class="notification-message">{{notification.message}}</p>
                 <span class="notification-time">{{notification.createdAt | date:'short'}}</span>
@@ -76,6 +73,28 @@
   </nav>
 
   <main class="main-content">
-    <router-outlet></router-outlet>
+    <ng-container *ngIf="isDashboardRoute">
+      <!-- Dashboard Tiles -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6">
+        <div class="tile" (click)="navigateTo('available-jobs')">
+          <h3>📋 Available Jobs</h3>
+          <p class="count">{{ availableJobsCount }}</p>
+          <p class="label">Jobs waiting to be accepted</p>
+        </div>
+        <div class="tile" (click)="navigateTo('my-jobs')">
+          <h3>✅ Completed Jobs</h3>
+          <p class="count">{{ completedJobsCount }}</p>
+          <p class="label">Jobs you've finished</p>
+        </div>
+        <div class="tile" (click)="navigateTo('earnings')">
+          <h3>💰 This Week</h3>
+          <p class="count">${{ weeklyEarnings }}</p>
+          <p class="label">Total earnings</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <router-outlet (activate)="onRouteChange()"></router-outlet>
   </main>
+
 </div>

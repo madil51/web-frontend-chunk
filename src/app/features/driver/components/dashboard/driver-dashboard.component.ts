@@ -18,13 +18,17 @@ export class DriverDashboardComponent implements OnInit, OnDestroy {
   unreadCount = 0;
   showNotifications = false;
   onlineStatus = false;
+  availableJobsCount = 5;
+  completedJobsCount = 8;
+  weeklyEarnings = 890;
+  isDashboardRoute = true;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private notificationService: NotificationService,
     private socketService: SocketService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.authService.getCurrentUser();
@@ -83,7 +87,7 @@ export class DriverDashboardComponent implements OnInit, OnDestroy {
       driverId: this.user.id,
       status: this.onlineStatus ? 'online' : 'offline'
     });
-    
+
     this.notificationService.showSuccess(
       this.onlineStatus ? 'You are now online' : 'You are now offline'
     );
@@ -140,5 +144,13 @@ export class DriverDashboardComponent implements OnInit, OnDestroy {
           console.error('Failed to clear notifications:', error);
         }
       });
+  }
+
+  navigateTo(path: string): void {
+    this.router.navigate([`/driver/${path}`]);
+  }
+
+  onRouteChange(): void {
+    this.isDashboardRoute = this.router.url === '/driver';
   }
 }
